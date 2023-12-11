@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Sign Up Page</title>
+
+    <style>
+        body {
+            background-image: url('https://eatdrinkinnovate.com.au/wp-content/uploads/2018/03/food-bg.jpg');
+        }
+
+        .card {
+            opacity: 90%;
+            background-color: orange;
+            margin-top: 20%;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Sign Up
+                </div>
+                <div class="card-body">
+                    <form id="signupForm">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Lastname:</label>
+                            <input type="text" class="form-control" id="lastname" placeholder="Enter lastname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Enter phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                        </div>
+                        <button type="button" onclick="submitForm()" style="margin-left:40%;" class="btn btn-primary">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
+<script>
+    function submitForm() {
+        const nameInput = document.getElementById('name').value;
+        const lastnameInput = document.getElementById('lastname').value;
+        const phoneInput = document.getElementById('phone').value;
+        const passwordInput = document.getElementById('password').value;
+
+        console.log("Data being sent:", { name: nameInput, lastname: lastnameInput, phone: phoneInput, password: passwordInput });
+
+        axios.post('/register', {
+            name: nameInput,
+            lastname: lastnameInput,
+            phone: phoneInput,
+            password: passwordInput
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            // Handle successful response
+            console.log(response.data);
+            showCustomAlert('success', 'User Successfully Registered!');
+            setTimeout(redirectToHome, 2000); // 2000 milliseconds (2 seconds) delay
+        })
+        .catch(error => {
+            // Handle error
+            console.error(error);
+            showCustomAlert('error', 'Registration Failed');
+        });
+    }
+
+    function showCustomAlert(icon, message) {
+        Swal.fire({
+            icon: icon,
+            title: message,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+    }
+
+    function redirectToHome() {
+
+        window.location.href = './';
+    }
+</script>
+
+
+
+
+</body>
+</html>

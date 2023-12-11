@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Login Page</title>
+
+    <style>
+        body {
+            background-image: url('https://eatdrinkinnovate.com.au/wp-content/uploads/2018/03/food-bg.jpg');
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card" style="opacity: 90%;background-color: orange;margin-top: 20%;">
+                <div class="card-header">
+                    Food Delivery
+                </div>
+                <div class="card-body">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="phone" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Phone:</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Enter phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Password:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                        </div>
+                        <button type="button" id="loginButton" style="margin-left:40%;" class="btn btn-success">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+document.getElementById('loginButton').addEventListener('click', submitForm);
+
+function submitForm() {
+    console.log('Button clicked');
+    const phoneInput = document.getElementById('phone').value;
+    const passwordInput = document.getElementById('password').value;
+
+    if (phoneInput.trim() !== '' && passwordInput.trim() !== '') {
+        // Simulating a successful login
+        showCustomAlert('success', 'Welcome Eya \nAre You Hungry ?');
+        setTimeout(redirectToHome, 2000);
+    } else {
+        showCustomAlert('error', 'Please fill in all fields');
+    }
+}
+
+function redirectToHome() {
+    // Replace 'your-target-page.html' with the actual page you want to redirect to
+    window.location.href = 'main';
+}
+
+function showCustomAlert(icon, message) {
+    Swal.fire({
+        icon: icon,
+        title: message,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    });
+}
+</script>
+
+</body>
+</html>
